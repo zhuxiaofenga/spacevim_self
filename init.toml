@@ -1,0 +1,130 @@
+#=============================================================================
+# basic.toml --- basic configuration example for SpaceVim
+# Copyright (c) 2016-2022 Wang Shidong & Contributors
+# Author: Wang Shidong < wsdjeg@outlook.com >
+# URL: https://spacevim.org
+# License: GPLv3
+#=============================================================================
+
+# All SpaceVim option below [option] section
+[options]
+    # set spacevim theme. by default colorscheme layer is not loaded,
+    # if you want to use more colorscheme, please load the colorscheme
+    # layer
+    colorscheme = "gruvbox"
+    colorscheme_bg = "dark"
+    # Disable guicolors in basic mode, many terminal do not support 24bit
+    # true colors
+    enable_guicolors = false
+
+# options for layers checkers
+    enable_neomake = true
+    enable_ale = false
+    lint_on_the_fly = false
+
+# option for autocomplete
+    autocomplete_method = "coc"
+
+    # Disable statusline separator, if you want to use other value, please
+    # install nerd fonts
+    statusline_separator = "nil"
+    statusline_iseparator = "bar"
+    buffer_index_type = 4
+    windows_index_type = 3
+    enable_tabline_filetype_icon = false
+    enable_statusline_mode = false
+    statusline_unicode = false
+    # Enable vim compatible mode, avoid changing origin vim key bindings
+    vimcompatible = true
+    bootstrap_before = "myspacevim#before"
+    bootstrap_after = "myspacevim#after"
+    project_rooter_patterns = ['.git/', '_darcs/', '.hg/', '.bzr/', '.svn/']
+    project_rooter_outermost = false
+
+# Enable autocomplete layer
+[[layers]]
+name = 'autocomplete'
+auto_completion_return_key_behavior = "complete"
+auto_completion_tab_key_behavior = "smart"
+
+[[layers]]
+name = 'shell'
+default_position = 'top'
+default_height = 30
+
+[[layers]]
+    name = "VersionControl"
+    enable-gtm-status = false
+
+[[layers]]
+    name = "lang#cmake"
+
+[[layers]]
+    name = "git"
+    git-plugin = "fugitive"
+
+[[layers]]
+    name = "fzf"
+
+
+[[layers]]
+name = "lang#c"
+enable_clang_syntax_highlight = true
+clang_executable = "/usr/bin/clang"
+[layer.clang_std]
+c = "c11"
+cpp = "c++1z"
+objc = "c11"
+objcpp = "c++1z"
+
+[[layers]]
+  name = "lsp"
+  filetypes = [
+    "c",
+    "cpp"
+  ]
+  enabled_clients = ['clangd']
+  [layers.override_cmd]
+    c = ["clangd"]
+    cpp = ["clangd"]
+
+[[layers]]
+  name = "format"
+
+[[layers]]
+  name = "gtags"
+  gtagslabel = "pygments"
+
+# coc.nvim 核心配置，不要删除
+# ~/.cache/vimfiles/repos/github.com/neoclide/coc.nvim
+[[custom_plugins]]
+    name = 'neoclide/coc.nvim'
+    merge = 0
+
+# 优化 coc 的搜索界面
+[[custom_plugins]]
+    name = 'antoinemadec/coc-fzf'
+    branch = 'release'
+
+[[custom_plugins]]
+    name = 'junegunn/fzf.vim'
+
+# 快速搜索文件和 buffer
+[[custom_plugins]]
+    name = "Yggdroot/LeaderF"
+    build = "./install.sh"
+
+# 为 c/cpp 提供基于 lsp 的高亮
+[[custom_plugins]]
+    name = 'jackguo380/vim-lsp-cxx-highlight'
+
+# 从 http://cplusplus.com/ 和 http://cppreference.com/ 获取文档
+[[custom_plugins]]
+    name = 'skywind3000/vim-cppman'
+
+# 利用 git blame 显示当前行的 commit message
+[[custom_plugins]]
+    name = 'rhysd/git-messenger.vim'
+    lazy =  1
+    on_cmd = 'GitMessenger'
+
